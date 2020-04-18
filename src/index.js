@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import * as serviceWorker from './serviceWorker';
 
-let testData = [
-  {name: "Dan Abramov", avatar_url: "https://avatars0.githubusercontent.com/u/810438?v=4", company: "@facebook"},
-  {name: "Sophie Alpert", avatar_url: "https://avatars2.githubusercontent.com/u/6820?v=4", company: "Humu"},
-  {name: "Sebastian Markbåge", avatar_url: "https://avatars2.githubusercontent.com/u/63648?v=4", company: "Facebook"},
-];
+// const testData = [
+//   {name: "Dan Abramov", avatar_url: "https://avatars0.githubusercontent.com/u/810438?v=4", company: "@facebook"},
+//   {name: "Sophie Alpert", avatar_url: "https://avatars2.githubusercontent.com/u/6820?v=4", company: "Humu"},
+//   {name: "Sebastian Markbåge", avatar_url: "https://avatars2.githubusercontent.com/u/63648?v=4", company: "Facebook"},
+// ];
 
 class Form extends React.Component {
   state = {
@@ -31,12 +32,12 @@ class Form extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input 
           type="text" 
-          placeholder="Github username"
+          placeholder="GitHub username"
           value={this.state.username}
           onChange={this.handleChange}
           required
         />
-        <button>Add card</button>
+        <button>Add Profile</button>
       </form>
     );
   }
@@ -46,7 +47,7 @@ class Card extends React.Component {
   render() {
     const profile = this.props;
     return (
-      <div className="gitprofile">
+      <div class="row" className="gitprofile">
         <img src={profile.avatar_url} alt="placeholder"/>
         <div className="info">
           <div className="name">{profile.name}</div>
@@ -59,9 +60,9 @@ class Card extends React.Component {
 
 const CardList = (props) => {
   return (
-    <div>
+    <div class="col">
   	  {props.profiles.map(profile => <Card {...profile} key={profile.avatar_url}/>)}
-	</div>
+	  </div>
   )
 };
 
@@ -69,11 +70,11 @@ class App extends React.Component {
   // constructor(props) {
   //   super(props);
   //   this.state = {
-  //     profiles: testData,
+  //     profiles: [],
   //   };
-  // }
+  // }s
   state = {
-    profiles: testData,
+    profiles: [],
   };
   addProfile = (newProfile) => {
     this.setState(prevState => ({
